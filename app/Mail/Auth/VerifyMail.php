@@ -27,6 +27,7 @@ class VerifyMail extends Mailable
     public function build()
     {
         return $this
+            ->from('admin@varvik.com.ua')
             ->subject('Verify email')
             ->markdown('mail.auth.register.verify');
     }

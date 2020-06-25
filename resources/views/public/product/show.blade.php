@@ -44,11 +44,7 @@
                                 <td>{{ $product->type }}</td>
                                 <td>{{ $product->code }}</td>
                                 <td>
-                                    @if('TYCO' === $product->seller)
-                                        {{tycoPrice($product->price)}}
-                                    @else
-                                        {{ productPrice($product->price) }}
-                                    @endif
+                                    {{$product->margin_price}}
                                 </td>
                                 <td>
                                     @if($product->isActive())

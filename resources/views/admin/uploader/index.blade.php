@@ -1,6 +1,9 @@
 @extends('layouts.cabinet')
 
 @section('content')
+    <div class="alert alert-success" role="alert">
+        Тут именно товары прайса твоего склада с 1С. Описание в "Товары" .
+    </div>
     {{--@include('admin.users._nav')--}}
     <div class="btn-group mt-2 mb-2">
         <form method="get" action="{{route('admin.uploader.index')}}">
@@ -14,6 +17,12 @@
             @csrf
             <input type="hidden" id="is_active" name="is_active" value="yes">
             <button class="btn btn-danger">Активированные</button>
+        </form>
+    </div>
+    <div class="btn-group mt-2 mb-2">
+        <form method="get" action="{{route('admin.margin.price')}}">
+            @csrf
+            <button class="btn btn-danger">Наценка</button>
         </form>
     </div>
     <div class="card mb-3">
@@ -73,9 +82,14 @@
                     <th>Производитель</th>
                     <th>Группа товара</th>
                     <th>Код</th>
-                    <th>Цена</th>
+                    <th>Цена прайс</th>
+                    <th>Цена с наценкой</th>
                     <th>Примечение</th>
+                    <th>Описание</th>
+                    <th>Ceo</th>
+                    <th>Картинка</th>
                     <th>Активный</th>
+                    <th>Редактировать</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -94,8 +108,21 @@
                             {{ $uploader->price }}
                         </td>
                         <td>
+                            {{ $uploader->margin_price }}
+                        </td>
+                        <td>
                             {{ $uploader->note }}
                         </td>
+                        <td>
+                            {{ $uploader->description }}
+                        </td>
+                        <td>
+                            {{ $uploader->meta_search }}
+                        </td>
+                        <td>
+                            {{ $uploader->image_link }}
+                        </td>
+
                         <td>
                             <form method="POST" action="{{ route('admin.uploader.activate', $uploader->id) }}" class="mr-1">
                                 @csrf
@@ -107,6 +134,9 @@
                                 @endif
                             </form>
 
+                        </td>
+                        <td>
+                            <a href="{{route('admin.uploader.edit', $uploader)}}" class="btn btn-bitbucket">Edit</a>
                         </td>
 
                     </tr>

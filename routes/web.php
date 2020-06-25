@@ -11,29 +11,7 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('home');
-//});
-////
-//Auth::routes();
-//
-//Route::get('/home', 'HomeController@index')->name('home');
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
 
 //Route::get('/', 'HomeController@index')->name('home');
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -111,7 +89,12 @@ Route::group([
 ],
     function() {
         Route::get('/', 'AdminController@index')->name('home');
+        Route::get('/margin-price', 'PriceMarginController@priceWithMargin')->name('margin.price');
         Route::resource('users', 'UsersController');
+        Route::get('/margins/edit', 'MarginsController@edit')->name('margins.edit');
+        Route::post('/margins/store', 'MarginsController@store')->name('margins.store');
+        Route::PATCH('/margin/update/{id}', 'MarginsController@update')->name('margin.update');
+
         Route::post('/users/{user}/verify', 'UsersController@verify')->name('users.verify');
         /*=============    Excel         ++++++++++++++*/
         Route::get('/excel/index', 'ExcelController@index')->name('excel.index');
@@ -130,8 +113,9 @@ Route::group([
         Route::post('/uploader/storePrice', 'UploaderController@storePrice')->name('uploader.storePrice');
         Route::post('/uploader/createPrice', 'UploaderController@createPrice')->name('uploader.createPrice');
         Route::get('/uploader', 'UploaderController@index')->name('uploader.index');
-        Route::get('/uploader/edit', 'UploaderController@edit')->name('uploader.edit');
+        Route::get('/uploader/edit/{uploader}', 'UploaderController@edit')->name('uploader.edit');
         Route::post('/uploader/activate/{id}', 'UploaderController@activate')->name('uploader.activate');
+        Route::PATCH('/uploader/update/{uploader}', 'UploaderController@update')->name('uploader.update');
         /*=============     Products      ++++++++++++++*/
         Route::get('products', 'ProductsController@index')->name('products.index');
         Route::get('products/show/{id}', 'ProductsController@show')->name('products.show');
@@ -148,5 +132,10 @@ Route::group([
         Route::resource('seller', 'SellerController');
         Route::get('seller/{id}/edit', 'SellerController@edit')->name('seller.edit');
         Route::post('/seller/add', 'SellerController@add')->name('seller.add');
+
+        /*=======================XML==========================*/
+        Route::get('xml', 'XmlController@show')->name('xml.index');
+        Route::post('xml/set', 'XmlController@setSettings')->name('xml.set');
+
 
 });

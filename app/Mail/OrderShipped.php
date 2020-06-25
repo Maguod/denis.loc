@@ -36,6 +36,7 @@ private $product;
     {
 
         return $this
+            ->from('admin@varvik.com.ua')
             ->subject('Заказ или вопрос')
             ->markdown('emails.orders.shipped' )
             ->with([
@@ -46,7 +47,7 @@ private $product;
                 'id' => $this->product ? $this->product->id : '',
                 'seller' => $this->product ? $this->product->seller : '',
                 'code' => $this->product ? $this->product->code : '',
-                'price' => $this->product ? $this->product->price : '',
+                'price' => $this->product ? $this->product->margin_price : '',
 
             ]);
     }

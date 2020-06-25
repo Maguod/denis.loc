@@ -95,7 +95,15 @@ class ProductsController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        $data = $this->validate($request, [
+            'code' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'note' => 'string|max:255',
+            'active' => 'required|in:yes,no',
+        ]);
 
+        $product->edit($data);
+        return redirect()->route('admin.products.index');
     }
 
 

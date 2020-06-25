@@ -33,7 +33,33 @@ class UploadsPriceUpdate implements ShouldQueue
      */
     public function handle()
     {
-//         $prods = Uploader::orderBy('seller','asc')->get(['id', 'seller','type','code','price','note'])->toArray();
+
+        $activeItem = [];
+        foreach ($this->data as $key=>$item) {
+            $up = Uploader::where([
+                ['code' , $item['code']],
+                ['seller' , $item['seller']],
+                ['note' , $item['note']]
+            ])->first();
+
+            if(null === $up) {
+                Uploader::store($item);
+                continue;
+            }elseif ((int) $up->price === (int) $item['price']){
+
+                $activeItem[]= $up->id;
+                continue;
+            }elseif((int) $up->price !== (int) $item['price']){
+                $up->editPrice(['price' => $item['price']]);
+                continue;
+            }
+            continue;
+        }
+        Uploader::whereIn('id', $activeItem)
+            ->update(['is_active' => 'yes']);
+
+
+        //         $prods = Uploader::orderBy('seller','asc')->get(['id', 'seller','type','code','price','note'])->toArray();
 
 //         $activeItem = [];
 //         $updatePrice = [];
@@ -85,29 +111,7 @@ class UploadsPriceUpdate implements ShouldQueue
 
 
 //     }
-        $activeItem = [];        // OLD CODE
-        foreach ($this->data as $key=>$item) {
-            $up = Uploader::where([
-                ['code' , $item['code']],
-                ['seller' , $item['seller']],
-                ['note' , $item['note']]
-            ])->first();
-
-            if(null === $up) {
-                Uploader::store($item);
-                continue;
-            }elseif ((int) $up->price === (int) $item['price']){
-
-                $activeItem[]= $up->id;
-                continue;
-            }elseif((int) $up->price !== (int) $item['price']){
-                $up->editPrice(['price' => $item['price']]);
-                continue;
-            }
-            continue;
-        }
-        Uploader::whereIn('id', $activeItem)
-            ->update(['is_active' => 'yes']);
+        // OLD CODE
     }
 }
 

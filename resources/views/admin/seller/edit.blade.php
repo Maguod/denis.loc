@@ -3,7 +3,7 @@
 @section('content')
     {{--@include('admin.users._nav')--}}
 
-    <form method="POST" action="{{ route('admin.seller.update', $seller->id) }}" enctype="multipart/form-data" >
+    <form method="POST" action="{{ route('admin.seller.update', [$seller->id) }}" enctype="multipart/form-data" >
         @csrf
         @method('PUT')
 

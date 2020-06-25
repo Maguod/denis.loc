@@ -5,7 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
+
 
 class VinShipped extends Mailable
 {
@@ -34,6 +34,7 @@ class VinShipped extends Mailable
     {
 
         return $this
+            ->from('admin@varvik.com.ua')
             ->subject('Запрос по VIN')
             ->markdown('emails.orders.vin' )
             ->with($this->data);

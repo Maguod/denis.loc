@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group month">
                         <label for="month"> Дата выпуска авто</label>
-                        <input type="month" id="month" name="month" value="2019-06">
+                        <input type="text" id="month" name="month" value="{{ old('month') }}">
                     </div>
                     <div>
                         <label for="capacity">Обьем двигателя</label>
@@ -69,28 +69,28 @@
                     </div>
                     <div>
                         <select style="width: 100%;" name="motor">
-                            <option value="">Тип двигателя
-                            </option><option value="Дизель">Дизель
-                            </option><option value="Бензин">Бензин
-                            </option><option value="Газ">Газ</option>
-                            </option><option value="Газ/Бензин">Газ/Бензин</option>
-                            </option><option value="Гибрид">Гибрид</option>
+                            <option value="">Тип двигателя</option>
+                            <option value="Дизель">Дизель</option>
+                            <option value="Бензин">Бензин</option>
+                            <option value="Газ">Газ</option>
+                            <option value="Газ/Бензин">Газ/Бензин</option>
+                            <option value="Гибрид">Гибрид</option>
                             <option value="Электро">Электро</option>
                         </select>
                     </div>
                     <div>
                         <select style="width: 100%;" name="kpp">
-                            <option value="">Выбрать КПП
-                            </option><option value="Ручная">Ручная
-                            </option><option value="Авто">Авто
-                            </option><option value="Вариатор">Вариатор</option>
+                            <option value="">Выбрать КПП</option>
+                            <option value="Ручная">Ручная</option>
+                            <option value="Авто">Авто</option>
+                            <option value="Вариатор">Вариатор</option>
                             <option value="Роботизированная">Роботизированная</option>
                         </select>
                     </div>
                     <div>
                         <select style="width: 100%;" name="kuzov">
-                            <option value="">Выбрать Кузова
-                            </option><option value="Седан">Седан</option>
+                            <option value="">Выбрать Кузова</option>
+                            <option value="Седан">Седан</option>
                             <option value="Хетчбек">Хетчбек</option>
                             <option value="Универсал">Универсал</option>
                             <option value="Джип">Джип</option>

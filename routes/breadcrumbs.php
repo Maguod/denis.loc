@@ -2,6 +2,7 @@
 
 use App\Entity\Category\Category;
 use App\Entity\User;
+use \App\Entity\Uploader;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator as Crumbs ;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
@@ -86,7 +87,10 @@ Breadcrumbs::register('admin.users.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
     $crumbs->push('Пользователи', route('admin.users.index'));
 });
-
+Breadcrumbs::register('admin.margins.edit', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push('Наценка', route('admin.margins.edit'));
+});
 Breadcrumbs::register('admin.users.create', function (Crumbs $crumbs) {
     $crumbs->parent('admin.users.index');
     $crumbs->push('Создать пользователя', route('admin.users.create'));
@@ -151,9 +155,9 @@ Breadcrumbs::register('admin.products.show', function (Crumbs $crumbs, $id) {
 /*==================Прайс т.е. Uploader+++++++++++++*/
 Breadcrumbs::register('admin.uploader.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push('Все товары', route('admin.products.index'));
+    $crumbs->push('Все товары', route('admin.uploader.index'));
 });
-Breadcrumbs::register('admin.uploader.edit', function (Crumbs $crumbs, \App\Entity\Uploader $uploader) {
+Breadcrumbs::register('admin.uploader.edit', function (Crumbs $crumbs, Uploader $uploader) {
     $crumbs->parent('admin.uploader.index');
     $crumbs->push('Редактивать товар', route('admin.uploader.edit', $uploader));
 });
@@ -208,4 +212,8 @@ Breadcrumbs::register('admin.seller.index', function (Crumbs $crumbs) {
 Breadcrumbs::register('admin.seller.edit', function (Crumbs $crumbs, $id) {
     $crumbs->parent('admin.seller.index');
     $crumbs->push('Редактировать производителя', route('admin.seller.edit',$id));
+});
+Breadcrumbs::register('admin.xml.index', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push('Данные для импорта', route('admin.xml.index'));
 });

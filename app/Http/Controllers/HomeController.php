@@ -69,7 +69,7 @@ class HomeController extends Controller
                 'brand' => $request['brand'] ? $request['brand'] : '',
                 'model' => $request['model']? $request['model'] : '',
                 'month' => $request['month']? $request['month'] : '',
-                'capacity' => $request['capacity']? $request['capacity'] : '',
+                'capacity' => $request['capacity'] ? $request['capacity'] : '',
                 'motor' => $request['motor']? $request['motor'] : '',
                 'kpp' => $request['kpp']? $request['kpp'] : '',
                 'kuzov' => $request['kuzov']? $request['kuzov'] : '',
@@ -88,6 +88,7 @@ class HomeController extends Controller
 
 
         $this->mailer->to('Rpmpartservice@gmail.com', 'Запрос по VIN')->send(new VinShipped($data));
+//        $this->mailer->to('admin@denis.loc', 'Запрос по VIN')->send(new VinShipped($data));
 
         return redirect()->back()->with('success', 'ваше письмо отправленно, ближайщее время мы вам перезвоним');
     }

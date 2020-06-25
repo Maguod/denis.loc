@@ -35,6 +35,7 @@ class SendShipped extends Mailable
     {
 
         return $this
+            ->from('admin@varvik.com.ua')
             ->subject('Вопрос')
             ->markdown('emails.orders.send' )
             ->with([

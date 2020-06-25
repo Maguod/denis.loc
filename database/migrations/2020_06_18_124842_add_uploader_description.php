@@ -14,9 +14,10 @@ class AddUploaderDescription extends Migration
     public function up()
     {
         Schema::table('uploader', function (Blueprint $table) {
+            $table->float('margin_price', 10, 2)->nullable()->after('note');
             $table->longText('description')->default('')->nullable()->after('is_active');
-            $table->mediumText('meta-search')->default('')->after('description')->nullable();
-            $table->mediumText('image-link')->after('meta-search')->default('')->nullable();
+            $table->mediumText('meta_search')->default('')->after('description')->nullable();
+            $table->mediumText('image_link')->after('meta-search')->default('')->nullable();
         });
     }
 
@@ -29,8 +30,9 @@ class AddUploaderDescription extends Migration
     {
         Schema::table('uploader', function (Blueprint $table) {
            $table->dropColumn('description');
-           $table->dropColumn('meta-search');
-           $table->dropColumn('image-link');
+           $table->dropColumn('meta_search');
+           $table->dropColumn('image_link');
+           $table->dropColumn('margin_price');
         });
     }
 }

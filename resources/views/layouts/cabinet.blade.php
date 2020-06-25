@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -111,14 +111,17 @@
                         <i class="fa fa-dashboard"></i> <span>Главная</span>
                     </a>
                 </li>
-                <li><a href="{{route('admin.users.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span>Пользователи</span></a></li>
+
                 <li><a href="{{route('admin.excel.index')}}"><i class="fa fa-upload" aria-hidden="true"></i> <span>Загрузчик</span></a></li>
                 <li><a href="{{route('admin.uploader.index')}}"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Прайс</span></a></li>
                 <li><a href="{{route('admin.products.index')}}"><i class="fa fa-sticky-note-o"></i> <span>Товары</span></a></li>
+                <li><a href="{{route('admin.margins.edit')}}"><i class="fa fa-sort-numeric-asc"></i> <span>Наценка</span></a></li>
+                <li><a href="{{route('admin.main.index')}}"><i class="fa fa-tags"></i> <span>Главные рубрики сайта</span></a></li>
                 <li><a href="{{route('admin.category.index')}}"><i class="fa fa-list-ul"></i> <span>Категории товаров</span></a></li>
                 <li><a href="{{route('admin.seller.index')}}"><i class="fa fa-truck"></i> <span>Производители</span></a></li>
-                <li><a href="{{route('admin.main.index')}}"><i class="fa fa-tags"></i> <span>Главные рубрики сайта</span></a></li>
-
+                <li><a href="{{route('admin.users.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span>Пользователи</span></a></li>
+                <li><a href="{{route('admin.xml.index')}}"><i class="fa fa-handshake-o" aria-hidden="true"></i> <span>XML</span></a></li>
+                <li><a href="{{route('admin.othersprice.index')}}"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Другой прайс</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

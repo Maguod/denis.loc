@@ -18,11 +18,15 @@ class Uploader extends Model
      *@property string $is_active
      *@property string $note
      *@property string $price
+     *@property string $margin_price
+     *@property string $description
+     *@property string $image_link
+     *@property string $meta_search
      **/
 
     use Sluggable;
 
-    protected $fillable = ['seller', 'type','code', 'slug','price','note', 'is_active'];
+    protected $fillable = ['id','seller', 'type','code', 'slug','price','note', 'is_active', 'margin_price','description','image_link','meta_search'];
     protected $table = 'uploader';
 
     public const STATUS_WAIT = 'no';
@@ -96,5 +100,14 @@ class Uploader extends Model
        } else {
            $this->deActive();
        }
+    }
+    public  function getPublicPrice()
+    {
+        return $this->margin_price;
+    }
+    public  function setPublicPrice(float $price)
+    {
+        $this->margin_price = $price;
+        $this->save();
     }
 }

@@ -39,65 +39,11 @@ class UploaderController extends Controller
 
         $arr = $this->excelDb->getData($request['exc']);
         Uploader::where('is_active', 'yes')->update(array('is_active' => 'no'));
-//         $prods = Uploader::orderBy('seller','asc')->get(['id', 'seller','type','code','price','note'])->toArray();
-
-//         $activeItem = [];
-//         $updatePrice = [];
-//         $store = [];
-
-//         foreach ($arr as $key=>$item){
-            
-
-//             foreach($prods as $keyP=>$prod) {
-// //                dd($keyP, count($prods));
-//                 if((string) $item['code'] === (string) $prod['code'] && (string) $item['note'] ===(string) $prod['note'] && (string) $item['seller'] === (string) $prod['seller'] ) {
-//                     if((int) $item['price'] === (int) $prod['price']) {
-//                         $activeItem[] = $prod['id'];
-//                         break(1);
-//                     }elseif((int) $item['price'] !== (int) $prod['price']){
-//                         dd($updatePrice, (int) $prod['price'], (int) $item['price']);
-//                         $updatePrice[$prod['id']] = $item['price'];
-                        
-//                         break(1);
-//                     }else{
-//                         throw new \Exception('Что то пошло не так. В цикле $item попал в else.');
-//                     }
-//                 }
-
-// //                dd(($keyP - 1), count($prods));
-//                 if( 1+ $keyP == count($prods)) {
-//                     $store[] = $item;
-//                     dd($item, $prods);
-//                 }
-                
-//             }
-
-//         }
-//         // dd(count($activeItem));
-// unset($prods);
-
-//         if(count($activeItem) > 0) {
-//             Uploader::whereIn('id', $activeItem)->update(array('is_active' => 'yes'));
-//         }
-// unset($activeItem);
-//         if(count($updatePrice) > 0) {
-//             foreach($updatePrice as $key=>$val) {
-//                 Uploader::where('id', $key)->update(array('price' => $val, 'is_active' => 'yes' ));
-//             }
-
-//         }
-// unset($updatePrice);
-//         if(count($store) > 0) {
-//             foreach($store as $new) {
-//                 Uploader::store($new);
-//             }
-//         }
 
 
-$this->dispatch(new UploadsPriceUpdate($arr));
-//        $job = new UploadsPriceUpdate($arr);
-//        $job->handle();
-        return redirect()->route('admin.excel.index')->with('success', 'All right' . date('H:i:s'));;
+        $this->dispatch(new UploadsPriceUpdate($arr));
+
+        return redirect()->route('admin.excel.index')->with('success', 'All right' . date('H:i:s'));
     }
 
 
@@ -178,18 +124,20 @@ $this->dispatch(new UploadsPriceUpdate($arr));
 
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Uploader $uploader)
     {
 
         $data = $this->validate($request, [
             'code' => 'required|string|max:255',
-            'price' => 'required|string|max:255',
-            'note' => 'string|max:255',
-            'active' => 'required|in:yes,no',
+            'price' => 'required|regex:/^\d*(\.\d{2})?$/',
+            'margin_price' => 'required|regex:/^\d*(\.\d{2})?$/',
+            'description' => 'nullable|string',
+            'note' => 'nullable|string',
+            'meta_search' => 'nullable|string',
+            'image_link' => 'nullable|string|max:255',
         ]);
-
-        $product->edit($data);
-        return redirect()->route('admin.products.index');
+        $uploader->edit($data);
+        return redirect()->route('admin.uploader.index');
     }
 
 
@@ -210,9 +158,11 @@ $this->dispatch(new UploadsPriceUpdate($arr));
         //
     }
 
-    public function edit(Product $product)
+    public function edit( Uploader $uploader)
     {
-        return view('admin.products.edit', compact('product'));
+//        $uploader = Uploader::find($id);
+
+        return view('admin.uploader.edit', compact('uploader'));
     }
 
 

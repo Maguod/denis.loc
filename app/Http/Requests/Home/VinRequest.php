@@ -25,9 +25,9 @@ class VinRequest extends FormRequest
     public function rules()
     {
         return [
-            'brand' => 'nullable|string|min:3|max:10',
-            'model' => 'nullable|string|min:3|max:100',
-            'month' => 'nullable|string|min:3|max:30',
+            'brand' => 'string|min:3|max:30',
+            'model' => 'string|min:3|max:100',
+            'month' => 'string|min:3|max:30',
             'capacity' => 'nullable|string|min:1|max:30',
             'motor' => 'nullable|string|min:2|max:20',
             'kpp' => 'nullable|string|min:3|max:100',
@@ -35,7 +35,7 @@ class VinRequest extends FormRequest
             'гидроусилитель' => 'nullable',
             'электроусилитель' => 'nullable',
             'кондиционер' => 'nullable',
-            'kuzov' => 'nullable|string|min:3|max:100',
+            'kuzov' => 'string|min:3|max:100',
             'vincode' => 'required|string|min:10|max:18',
             'engine' => 'nullable|string|min:3|max:18',
             'mess' => 'required|string|min:3|max:500',

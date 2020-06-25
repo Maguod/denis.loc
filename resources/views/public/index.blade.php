@@ -93,11 +93,7 @@
                                 {{ $product->code }}
                             </td>
                             <td>
-                                @if('TYCO' === $product->seller)
-                                    {{tycoPrice($product->price)}}
-                                @else
-                                {{ productPrice($product->price) }}
-                                @endif
+                                {{$product->margin_price}}
                             </td>
                             <td>
                                 <a href="{{route('public.product.show', $product->slug)}}" class="btn btn-info">Заказать\ вопрос</a>

@@ -78,5 +78,37 @@ class ExcelBd extends Model
         unset($excel);unset($file);
         return $arr;
     }
+public function getOtherPriceData($id)
+    {
+
+        $file = Excel::findOrFail($id);
+
+        $excel = new ExcelBd();
+//        $fileName = Storage::get($file->uploadIn);
+        $spreadsheet = IOFactory::load('excel/otherPrices'. $file->name);
+
+        $spreadsheet->setActiveSheetIndex(0); /*Указываем активный лист документа*/
+        $sheet = $spreadsheet->getActiveSheet();/*и получаем его*/
+        $rowIterator = $sheet->getRowIterator();
+        $arr = [];
+        foreach($rowIterator as $row) {
+            if($row->getRowIndex() !== 1) {
+                $cellIterator = $row->getCellIterator();
+
+                foreach($cellIterator as $cell) {
+
+                    $cellPath = $cell->getColumn();
+
+                    if(isset($excel->cells[$cellPath])) {
+
+                            $arr[$row->getRowIndex() - 1][$excel->cells[$cellPath]] = $cell->getCalculatedValue();
+
+                    }
+
+                }
+            }
+        }
+        return $arr;
+    }
 
 }
